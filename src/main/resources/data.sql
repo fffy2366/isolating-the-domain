@@ -1,5 +1,5 @@
 INSERT INTO users.users (user_id, name, password) VALUES
-  ('fukawa_teruyoshi@example.com', '布川 光良', 'fukawa_teruyoshi@example.com'),
+  ('fukawa_teruyoshi@example.com', '布川 光良2', 'fukawa_teruyoshi@example.com'),
   ('kuriyama_yuino@example.com', '栗山 友以乃', 'kuriyama_yuino@example.com'),
   ('inui_shigeki@example.com', '乾 茂樹', 'inui_shigeki@example.com'),
   ('fujimura_kaoru@example.com', '藤村 薫', 'fujimura_kaoru@example.com'),
