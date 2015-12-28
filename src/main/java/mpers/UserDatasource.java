@@ -1,4 +1,4 @@
-package example.datasource.user;
+package mpers;
 
 import example.model.user.*;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package example.datasource.user;
+package mpers;
 
 import example.model.user.User;
 import example.model.user.UserId;

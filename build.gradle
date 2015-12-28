@@ -44,6 +44,7 @@ jar {
 }
 
 dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
 
     compile("org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}")
@@ -64,9 +65,14 @@ dependencies {
     compile("org.mybatis:mybatis:3.2.8")
     compile("org.mybatis:mybatis-spring:1.2.2")
     compile ("mysql:mysql-connector-java:5.1.6")
+    compile("'com.google.code.gson:gson:2.5'")
+
 
     runtime('org.postgresql:postgresql:9.4-1201-jdbc41')
     runtime("com.h2database:h2:1.4.187")
+    runtime("mysql:mysql-connector-java:5.1.6")
+    runtime("'com.google.code.gson:gson:2.5'")
+
 
     compile("org.springframework.boot:spring-boot-starter-mail:${springBootVersion}")
 

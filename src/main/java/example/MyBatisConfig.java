@@ -1,7 +1,7 @@
 package example;
 
-import example.datasource.infrastructure.mybatis.LocalDateHandler;
-import example.datasource.infrastructure.mybatis.LocalDateTimeHandler;
+import example.datasource.user.infrastructure.mybatis.LocalDateHandler;
+import example.datasource.user.infrastructure.mybatis.LocalDateTimeHandler;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.TypeHandler;
 import org.mybatis.spring.SqlSessionFactoryBean;

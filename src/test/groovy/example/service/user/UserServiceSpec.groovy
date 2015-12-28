@@ -40,7 +40,7 @@ class UserServiceSpec extends Specification {
     }
 
 
-    def "ユーザがIDで取得できること"() {
+    def "用户ID取得能"() {
         given:
         def id = new UserId('seiji.kawakami@sora-works.com')
         when:
@@ -53,14 +53,14 @@ class UserServiceSpec extends Specification {
         actual.hasSamePassword(new Password("password1234"))
     }
 
-    def "全ユーザが取得できること"() {
+    def "取得全部用户"() {
         when:
         def users = service.list();
         then:
         users.list().size() == 2;
     }
 
-    def "ユーザーを登録できること"() {
+    def "用户可以注册"() {
         given:
         def user = new User()
         def id = new UserId("hogefuga@example.com")
@@ -87,7 +87,7 @@ class UserServiceSpec extends Specification {
 
     }
 
-    def "ユーザが削除できること" () {
+    def "用户可以删除" () {
         given:
         def user = new User()
         user.id = new UserId("seiji.kawakami@sora-works.com")

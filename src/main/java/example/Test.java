@@ -1,8 +1,9 @@
 package example;
 
-import example.model.user.UserSummaries;
+import com.google.gson.Gson;
+import example.model.user.User;
+import example.model.user.UserId;
 import example.service.UserService;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -19,8 +20,12 @@ public class Test {
     UserService userService;
 
     public String a(){
-        UserSummaries userSummaries = userService.list() ;
-        System.out.println(userSummaries.toString());
+        User user = new User() ;
+        user.setId(new UserId("22@test.com"));
+        userService.register(user);
+        //UserSummaries userSummaries = userService.list() ;
+        //System.out.println(userSummaries.toString());
+
         return "3" ;
     }
 
