@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -58,6 +59,47 @@ public class Main {
     }
 
     /**
+     * 抓取所有酒店
+     */
+    public static void curlAllHotel(){
+        List list = findHotelId() ;
+        List<String> list1 = hotelIdGroup(list) ;
+        for (int i=0;i<list1.size();i++){
+            curlHotel(list1.get(i));
+        }
+    }
+    /**
+     * 20一组hotelid
+     * @param hotelIds
+     * @return
+     */
+    public static List hotelIdGroup(List<HotelId> hotelIds){
+        List<String> list = new ArrayList<String>() ;
+        String str = "" ;
+
+        int start = 0 ;
+        int size = hotelIds.size() ;
+        for (int i=start;i<size;i++){
+            //满20一组
+            if(i!=start&&i%20==0){
+                //System.out.println(i) ;
+                str = str.substring(0,str.length()-1) ;
+                //System.out.println(str) ;
+
+                list.add(str);
+                str = i+"/" ;
+            }else{
+                str = str+i+"/" ;
+            }
+            //最后一个
+            if(i==size){
+                str = str.substring(0,str.length()-1) ;
+                list.add(str);
+            }
+        }
+        return list ;
+    }
+    /**
      * 查找所有酒店id
      */
     public static List<HotelId> findHotelId(){
@@ -80,9 +122,9 @@ public class Main {
     }
 
     /**
-     * 抓取酒店
+     * 抓取一组酒店
      */
-    public static void curlHotel(){
+    public static void curlHotel(String hotelIds){
         String message ;
         String res ;
         Main m = new Main();
@@ -90,7 +132,7 @@ public class Main {
         HotelRequest hotelRequest = new HotelRequest() ;
         hotelRequest.setUsercd("sz2747");
         hotelRequest.setAuthno("123456");
-        hotelRequest.setHotelIds("4/5/7/4/8");
+        hotelRequest.setHotelIds(hotelIds);
         hotelRequest.setQueryType("hotelinfo");
         message =  gson.toJson(hotelRequest);
         try {
@@ -98,6 +140,9 @@ public class Main {
             HotelResult hotelId = gson.fromJson(res,HotelResult.class) ;
             System.out.println(hotelId.getMsg());
             List<HotelResult.Data> list= hotelId.getData() ;
+            //保存酒店
+            Hotel hotel = new Hotel() ;
+            //保存房型
 
 
             System.out.println(list.size()) ;
