@@ -21,7 +21,7 @@ public class Main {
         sqlSessionFactory = MyBatisUtil.getSqlSessionFactory();
     }
 
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         // write your code here
         //doPost(message,"http://58.250.56.214:6000/commonQueryServlet") ;
         String message ;

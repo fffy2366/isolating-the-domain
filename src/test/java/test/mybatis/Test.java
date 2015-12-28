@@ -1,20 +1,18 @@
-package example;
+package test.mybatis;
 
-import com.google.gson.Gson;
 import example.model.user.User;
 import example.model.user.UserId;
 import example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by feng on 15/12/25.
  */
 public class Test {
-    public  static void main(String[] args){
+    public  static void main2(String[] args){
 
         Test test = new Test() ;
         //test.a() ;

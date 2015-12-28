@@ -12,7 +12,7 @@ public class TestMyBatis {
 		sqlSessionFactory = MyBatisUtil.getSqlSessionFactory();
 	}
 
-	public static void main(String[] args) {
+	public static void main2(String[] args) {
 		testAdd();
 		getUser();
 	}
