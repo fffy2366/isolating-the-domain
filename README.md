@@ -38,3 +38,15 @@ https://github.com/system-sekkei/isolating-the-domain
 [gradle document](https://docs.gradle.org/current/userguide/dependency_management.html)
 
 [mybatis document](http://mybatis.org/mybatis-3/zh/getting-started.html)
+
+
+[使用Spring Boot快速构建应用](http://mrlee23.iteye.com/blog/2047968)
+
+[Spring Boot with Mysql](http://duqicauc.github.io/Spring-Boot-with-Mysql/)
+
+[Spring 4 and MyBatis Java Config](http://blog.lanyonm.org/articles/2014/04/21/spring-4-mybatis-java-config.html)
+
+[h2database](http://www.h2database.com/html/tutorial.html#console_settings)
+
+[Querying the embedded H2 database of a Spring Boot application
+](http://blog.techdev.de/querying-the-embedded-h2-database-of-a-spring-boot-application/)

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="example.datasource.hotel.HotelRoomMapper">
+
+	<!-- 这里namespace必须是HotelRoomMapper接口的路径，不然要运行的时候要报错 “is not known to the MapperRegistry” -->
+	<insert id="insertHotelRoom" parameterType="example.model.hotel.HotelRoom">
+		insert into hotel_room(hotel_id,jltour_roomtypeid,name,type,description,breakfast,broadband,wifi,price,weekend_price,bed_type,
+		floor,building_area,non_smoking_rooms,bed_type_desc,galleryful,exclusive_count,count,bed_width,customer_groups,
+		cancel,check_in_rule,created_at,jltour_active)
+		values(#{hotel_id},#{jltour_roomtypeid},#{name},#{type},#{description},#{breakfast},#{broadband},#{wifi},#{price},#{weekend_price},#{bed_type},
+		#{floor},#{building_area},#{non_smoking_rooms},#{bed_type_desc},#{galleryful},#{exclusive_count},#{count},#{bed_width},#{customer_groups},
+		#{cancel},#{check_in_rule},#{created_at},#{jltour_active})
+		<!-- 这里sql结尾不能加分号，否则报“ORA-00911”的错误 -->
+	</insert>
+
+	<update id="update" parameterType="example.model.hotel.HotelRoom">
+		update hotel_room set hotel_id=#{hotel_id},name=#{name},type=#{type},description=#{description},breakfast=#{breakfast},
+		broadband=#{broadband},wifi=#{wifi},price=#{price},weekend_price=#{weekend_price},bed_type=#{bed_type},
+		floor=#{floor},building_area=#{building_area},non_smoking_rooms=#{non_smoking_rooms},bed_type_desc=#{bed_type_desc},
+		galleryful=#{galleryful},exclusive_count=#{exclusive_count},count=#{count},bed_width=#{bed_width},customer_groups=#{customer_groups},
+		cancel=#{cancel},check_in_rule=#{check_in_rule},created_at=#{created_at},jltour_active=#{jltour_active}
+		where jltour_roomtypeid=#{jltour_roomtypeid}
+
+	</update>
+	<!-- 这里的id必须和HotelMapper接口中的接口方法名相同，不然运行的时候也要报错 -->
+	<select id="getHotelRoom" resultType="example.model.hotel.HotelRoom" parameterType="java.lang.String">
+		select * from hotel_room where room_id=#{hotel_id}
+	</select>
+
+	<select id="getHotelRoomByJltourRid" resultType="example.model.hotel.HotelRoom" parameterType="java.lang.String">
+		select * from hotel_room where jltour_roomtypeid=#{jltour_roomtypeid}
+	</select>
+
+</mapper>

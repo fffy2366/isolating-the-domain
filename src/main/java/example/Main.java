@@ -2,7 +2,12 @@ package example;
 
 import com.google.gson.Gson;
 import example.datasource.hotel.HotelIdMapper;
+import example.datasource.hotel.HotelMapper;
 import example.model.hotel.*;
+import example.service.HotelIdService;
+import example.service.HotelRoomService;
+import example.service.HotelService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -21,7 +26,7 @@ public class Main {
         sqlSessionFactory = MyBatisUtil.getSqlSessionFactory();
     }
 
-    public static void main2(String[] args) {
+    public static void main(String[] args) {
         // write your code here
         //doPost(message,"http://58.250.56.214:6000/commonQueryServlet") ;
         String message ;
@@ -42,7 +47,7 @@ public class Main {
             //res = m.doPost(message, "http://58.250.56.214:6000/commonQueryServlet");
 
             //3.4 变价通知(getHotelPricelist)?
-            message="{'Usercd':'szjl','Authno':'123456','roomtypeids':'1/2/3'}";
+            //message="{'Usercd':'szjl','Authno':'123456','roomtypeids':'1/2/3'}";
 
             //3.5下单前检验最新价格、房态接口
             //message = "{'Usercd':'sz2747','Authno':'123456','QueryType':'checkprice','roomTypeId':1, 'checkInDate':'2016-3-19','checkOutDate':'2016-3-20','roomNum':1,'pricingType':12,'rateType':1}" ;
@@ -51,7 +56,14 @@ public class Main {
             //curlHotelId() ;
             //3.1 抓取酒店
             //curlHotel() ;
-            System.out.println(findHotelId().size()) ;
+            //System.out.println(findHotelId().size()) ;
+            //curlAllHotel() ;//抓取所有酒店
+            //curlHotel("2149/2606/2954/3194") ;
+            //System.out.println(findHotel("1"));
+            //HotelRoom hotelRoom = HotelRoomService.findHotelRoom("1") ;
+            //System.out.println(hotelRoom.getName());
+
+            //3.3抓取价格
             //System.out.print(res);
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -62,64 +74,18 @@ public class Main {
      * 抓取所有酒店
      */
     public static void curlAllHotel(){
-        List list = findHotelId() ;
-        List<String> list1 = hotelIdGroup(list) ;
+        List<HotelId> list = HotelIdService.findHotelId() ;
+        System.out.println(list.get(0).getHotelid());
+        List<String> list1 = HotelIdService.hotelIdGroup(list) ;
+        System.out.println(list1.size()) ;
+
         for (int i=0;i<list1.size();i++){
+            System.out.println(list1.get(i)) ;
             curlHotel(list1.get(i));
         }
     }
-    /**
-     * 20一组hotelid
-     * @param hotelIds
-     * @return
-     */
-    public static List hotelIdGroup(List<HotelId> hotelIds){
-        List<String> list = new ArrayList<String>() ;
-        String str = "" ;
 
-        int start = 0 ;
-        int size = hotelIds.size() ;
-        for (int i=start;i<size;i++){
-            //满20一组
-            if(i!=start&&i%20==0){
-                //System.out.println(i) ;
-                str = str.substring(0,str.length()-1) ;
-                //System.out.println(str) ;
 
-                list.add(str);
-                str = i+"/" ;
-            }else{
-                str = str+i+"/" ;
-            }
-            //最后一个
-            if(i==size){
-                str = str.substring(0,str.length()-1) ;
-                list.add(str);
-            }
-        }
-        return list ;
-    }
-    /**
-     * 查找所有酒店id
-     */
-    public static List<HotelId> findHotelId(){
-        List<HotelId> hotelIds = null ;
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        try {
-            HotelIdMapper hotelIdMapper = sqlSession.getMapper(HotelIdMapper.class);
-            HotelId hotelId = new HotelId();
-
-            hotelIds = hotelIdMapper.findHotelIds() ;
-            sqlSession.commit();// 这里一定要提交，不然数据进不去数据库中
-            return hotelIds ;
-
-        } catch (Exception e){
-            System.out.println(e.toString());
-        } finally {
-            sqlSession.close();
-        }
-        return hotelIds ;
-    }
 
     /**
      * 抓取一组酒店
@@ -137,11 +103,87 @@ public class Main {
         message =  gson.toJson(hotelRequest);
         try {
             res = m.doPost(message, "http://58.250.56.214:6000/commonQueryServlet");
+//            System.out.println(res);
+//            if(true){
+//                return;
+//            }
             HotelResult hotelId = gson.fromJson(res,HotelResult.class) ;
             System.out.println(hotelId.getMsg());
             List<HotelResult.Data> list= hotelId.getData() ;
-            //保存酒店
-            Hotel hotel = new Hotel() ;
+            for (int i=0;i<list.size();i++){
+
+                HotelResult.Data data = list.get(i) ;
+                //查找酒店
+                Hotel h = HotelService.findHotelByJltourHid(data.getHotelid() + "") ;
+                if(h==null){
+                    h = new Hotel() ;
+                }
+                h.setJltour_hotel_id(data.getHotelid());
+                h.setName(data.getNamechn());
+                h.setNumbering(data.getHotelcd());
+                h.setAddress(data.getAddresschn());
+                h.setTel(data.getCentraltel());
+                h.setCheck_in_rules("");
+                h.setFeature("");
+                h.setService("");
+                h.setStars(data.getStar() * 2);
+                h.setCity_id(1);
+                h.setLongitude(data.getJingdu());
+                h.setLatitude(data.getWeidu());
+                if(h.getHotel_id()==0){
+                    //保存酒店
+                    HotelService.addHotel(h);
+                }else{
+                    //更新
+                    HotelService.updateHotel(h);
+                }
+
+                //更新房型
+                List<HotelResult.Data.Rooms> roomsList  = data.getRooms() ;
+                for (int j=0;j<roomsList.size();j++){
+                    HotelResult.Data.Rooms rooms = roomsList.get(j) ;
+                    //查找房型
+                    //System.out.println(hotelRoom.getJltour_roomtypeid());
+                    //HotelRoomService.findHotelRoom()
+                    HotelRoom hotelRoom = HotelRoomService.findHotelRoomByJltourRid(rooms.getRoomtypeid()+"") ;
+                    if(hotelRoom==null){
+                        hotelRoom = new HotelRoom() ;
+                    }
+                    hotelRoom.setJltour_roomtypeid(rooms.getRoomtypeid()+"");
+                    hotelRoom.setHotel_id(h.getHotel_id() + "");
+                    hotelRoom.setName(rooms.getNamechn());
+                    hotelRoom.setType("1");
+                    hotelRoom.setDescription(rooms.getRemark2());
+                    hotelRoom.setBreakfast("");
+                    hotelRoom.setBroadband("");
+                    hotelRoom.setWifi("");
+                    hotelRoom.setBed_type((new BedType()).getType(rooms.getBedtype()));
+
+                    hotelRoom.setPrice(0+ "");
+                    hotelRoom.setWeekend_price(0+"");
+
+                    hotelRoom.setFloor(rooms.getFloordistribution());
+                    hotelRoom.setBuilding_area(rooms.getAcreages());
+                    hotelRoom.setNon_smoking_rooms(rooms.getNosm()==1?"是":"否");
+
+                    hotelRoom.setBed_type(rooms.getBedtype());
+                    hotelRoom.setBed_type_desc(rooms.getBedtype());
+
+                    hotelRoom.setGalleryful("");//缺少容纳人数
+                    hotelRoom.setCancel(2);//1 可取消 2 不可取消
+                    hotelRoom.setExclusive_count("0");
+                    hotelRoom.setCount("0");
+                    hotelRoom.setBed_width("");
+                    hotelRoom.setJltour_active(rooms.getActive());
+                    if(hotelRoom.getRoom_id()==null){
+                        HotelRoomService.addHotelRoom(hotelRoom);
+                    }else {
+                        HotelRoomService.updateHotelRoom(hotelRoom);
+                    }
+
+                }
+            }
+
             //保存房型
 
 
@@ -175,39 +217,16 @@ public class Main {
                 hotelId1.setCountry(list.get(i).getCountry());
                 hotelId1.setHotelname(list.get(i).getHotelname());
                 hotelId1.setState(list.get(i).getState());
-                //testAdd(hotelId1);
+                //HotelIdService.add(hotelId1);
             }
         } catch (Exception e) {
             System.out.println(e.toString());
         }
 
     }
-    /**
-     * 写入酒店ID
-     * @param hotel
-     */
-    public static void testAdd(HotelId hotel) {
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        try {
-            HotelIdMapper hotelIdMapper = sqlSession.getMapper(HotelIdMapper.class);
-            HotelId hotelId = new HotelId();
 
-            hotelId.setHotelid(hotel.getHotelid());
-            hotelId.setCountry(hotel.getCountry());
-            hotelId.setCity(hotel.getCity());
-            hotelId.setState(hotel.getState());
-            hotelId.setHotelname(hotel.getHotelname());
 
-            hotelIdMapper.insertHotelId(hotelId);
-            System.out.println(hotelId.getHotelname());
-            sqlSession.commit();// 这里一定要提交，不然数据进不去数据库中
-        } finally {
-            sqlSession.close();
-        }
-    }
-    public static void addHotel(Hotel hotel){
 
-    }
     /**
      * 3.1 该接口由深圳捷旅提供，供客户调用 ，用于客户获取捷旅指定酒店列表的酒店基本信息、房型基本信息。
      *

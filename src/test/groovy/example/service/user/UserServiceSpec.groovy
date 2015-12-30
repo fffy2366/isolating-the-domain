@@ -56,6 +56,7 @@ class UserServiceSpec extends Specification {
     def "取得全部用户"() {
         when:
         def users = service.list();
+        System.out.println("size---->:"+users.list().size()) ;
         then:
         users.list().size() == 2;
     }

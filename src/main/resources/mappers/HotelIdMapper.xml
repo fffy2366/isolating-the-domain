@@ -3,6 +3,13 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="example.datasource.hotel.HotelIdMapper">
+	<resultMap id="hotelid" type="example.model.hotel.HotelId">
+		<id property="hotelid" column="hotelid"/>
+		<result property="city" column="city"/>
+		<result property="country" column="country"/>
+		<result property="hotelname" column="hotelname"/>
+		<result property="state" column="state"/>
+	</resultMap>
 	<!-- 这里namespace必须是HotelMapper接口的路径，不然要运行的时候要报错 “is not known to the MapperRegistry” -->
 	<insert id="insertHotelId" parameterType="HotelId">
 		insert into jltour_hotel_id(hotelid,city,country,hotelname,state) values(#{hotelid},#{city},#{country},#{hotelname},#{state})
@@ -13,7 +20,7 @@
 	<select id="getHotelId" resultType="HotelId" parameterType="java.lang.String">
 		select * from jltour_hotel_id where hotelid=#{hotelid}
 	</select>
-	<select id="findHotelIds" resultType="List">
+	<select id="findHotelIds" resultMap="hotelid">
 		select * from jltour_hotel_id
 	</select>
 

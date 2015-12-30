@@ -9,5 +9,5 @@ public interface HotelIdMapper {
 
 	public HotelId getHotelId(String name);
 
-	public List findHotelIds() ;
+	public List<HotelId> findHotelIds() ;
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="example.datasource.hotel.HotelMapper">
+
+	<!-- 这里namespace必须是HotelMapper接口的路径，不然要运行的时候要报错 “is not known to the MapperRegistry” -->
+	<insert id="insertHotel" parameterType="example.model.hotel.Hotel" useGeneratedKeys="true" keyProperty="hotel_id">
+		insert into hotel(jltour_hotel_id,name,numbering,is_exclusive,address,tel,
+		check_in_rules,feature,service,stars,city_id,longitude,latitude)
+		values(#{jltour_hotel_id},#{name},#{numbering},#{is_exclusive},#{address},#{tel},
+		#{check_in_rules},#{feature},#{service},#{stars},#{city_id},#{longitude},#{latitude})
+		<!-- 这里sql结尾不能加分号，否则报“ORA-00911”的错误 -->
+	</insert>
+
+	<update id="update" parameterType="example.model.hotel.Hotel">
+		update hotel set name=#{name},numbering=#{numbering},is_exclusive=#{is_exclusive},address=#{address},tel=#{tel},
+		check_in_rules=#{check_in_rules},feature=#{feature},service=#{service},stars=#{stars},city_id=#{city_id},longitude=#{longitude},latitude=#{latitude}
+		where hotel_id=#{hotel_id}
+
+	</update>
+	<!-- 这里的id必须和HotelMapper接口中的接口方法名相同，不然运行的时候也要报错 -->
+	<select id="getHotel" resultType="example.model.hotel.Hotel" parameterType="java.lang.String">
+		select * from hotel where hotel_id=#{hotel_id}
+	</select>
+
+	<select id="getHotelByJltourHid" resultType="example.model.hotel.Hotel" parameterType="java.lang.String">
+		select * from hotel where jltour_hotel_id=#{jltour_hotel_id}
+	</select>
+
+</mapper>
