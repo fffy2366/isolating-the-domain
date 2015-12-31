@@ -8,6 +8,10 @@ public class Hotel {
 
     private int hotel_id ;
     private int jltour_hotel_id ;
+
+    private int jltour_countryid ;
+    private int jltour_stateid ;
+    private int jltour_cityid ;
     private String name;
     private String numbering;
     private int is_exclusive;//是否遛弯专属
@@ -36,7 +40,29 @@ public class Hotel {
     public void setJltour_hotel_id(int jltour_hotel_id) {
         this.jltour_hotel_id = jltour_hotel_id;
     }
+    public int getJltour_countryid() {
+        return jltour_countryid;
+    }
 
+    public void setJltour_countryid(int jltour_countryid) {
+        this.jltour_countryid = jltour_countryid;
+    }
+
+    public int getJltour_stateid() {
+        return jltour_stateid;
+    }
+
+    public void setJltour_stateid(int jltour_stateid) {
+        this.jltour_stateid = jltour_stateid;
+    }
+
+    public int getJltour_cityid() {
+        return jltour_cityid;
+    }
+
+    public void setJltour_cityid(int jltour_cityid) {
+        this.jltour_cityid = jltour_cityid;
+    }
     public String getLatitude() {
         return latitude;
     }

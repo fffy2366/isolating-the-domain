@@ -2,6 +2,8 @@ package example.service;
 
 import example.MyBatisUtil;
 import example.datasource.hotel.HotelIdMapper;
+import example.datasource.hotel.HotelMapper;
+import example.model.hotel.Hotel;
 import example.model.hotel.HotelId;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -39,6 +41,41 @@ public class HotelIdService {
         } finally {
             sqlSession.close();
         }
+    }
+    /**
+     * 更新酒店ID
+     * @param hotel
+     */
+    public static void update(HotelId hotel){
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            HotelIdMapper hotelIdMapper = sqlSession.getMapper(HotelIdMapper.class);
+
+            hotelIdMapper.update(hotel);
+            sqlSession.commit();// 这里一定要提交，不然数据进不去数据库中
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+    /**
+     * 根据id查找某一酒店
+     */
+    public static HotelId getHotelId(String hotelId){
+        HotelId hotel = new HotelId();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            HotelIdMapper hotelIdMapper = sqlSession.getMapper(HotelIdMapper.class);
+
+            hotel = hotelIdMapper.getHotelId(hotelId) ;
+            return hotel ;
+
+        } catch (Exception e){
+            System.out.println(e.toString());
+        } finally {
+            sqlSession.close();
+        }
+        return hotel ;
     }
     /**
      * 查找所有酒店id

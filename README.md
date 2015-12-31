@@ -48,5 +48,4 @@ https://github.com/system-sekkei/isolating-the-domain
 
 [h2database](http://www.h2database.com/html/tutorial.html#console_settings)
 
-[Querying the embedded H2 database of a Spring Boot application
-](http://blog.techdev.de/querying-the-embedded-h2-database-of-a-spring-boot-application/)
+[Querying the embedded H2 database of a Spring Boot application](http://blog.techdev.de/querying-the-embedded-h2-database-of-a-spring-boot-application/)

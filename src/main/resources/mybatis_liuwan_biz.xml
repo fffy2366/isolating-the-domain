@@ -28,6 +28,7 @@
         <mapper resource="mappers/HotelIdMapper.xml" />
         <mapper resource="mappers/HotelMapper.xml" />
         <mapper resource="mappers/HotelRoomMapper.xml" />
+        <mapper resource="mappers/JltourCityMapper.xml" />
     </mappers>
 </configuration>  
 

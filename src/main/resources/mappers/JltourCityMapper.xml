@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="example.datasource.city.JltourCityMapper">
+
+	<!-- 这里的id必须和HotelMapper接口中的接口方法名相同，不然运行的时候也要报错 -->
+	<select id="getJlcity" resultType="example.model.city.JltourCity" parameterType="java.lang.String">
+		select * from jltour_city where cityid=#{cityid}
+	</select>
+
+</mapper>

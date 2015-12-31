@@ -6,15 +6,16 @@
 
 	<!-- 这里namespace必须是HotelMapper接口的路径，不然要运行的时候要报错 “is not known to the MapperRegistry” -->
 	<insert id="insertHotel" parameterType="example.model.hotel.Hotel" useGeneratedKeys="true" keyProperty="hotel_id">
-		insert into hotel(jltour_hotel_id,name,numbering,is_exclusive,address,tel,
+		insert into hotel(jltour_hotel_id,jltour_countryid,jltour_stateid,jltour_cityid,name,numbering,is_exclusive,address,tel,
 		check_in_rules,feature,service,stars,city_id,longitude,latitude)
-		values(#{jltour_hotel_id},#{name},#{numbering},#{is_exclusive},#{address},#{tel},
+		values(#{jltour_hotel_id},#{jltour_countryid},#{jltour_stateid},#{jltour_cityid},#{name},#{numbering},#{is_exclusive},#{address},#{tel},
 		#{check_in_rules},#{feature},#{service},#{stars},#{city_id},#{longitude},#{latitude})
 		<!-- 这里sql结尾不能加分号，否则报“ORA-00911”的错误 -->
 	</insert>
 
 	<update id="update" parameterType="example.model.hotel.Hotel">
-		update hotel set name=#{name},numbering=#{numbering},is_exclusive=#{is_exclusive},address=#{address},tel=#{tel},
+		update hotel set jltour_hotel_id=#{jltour_hotel_id},jltour_countryid=#{jltour_countryid},jltour_stateid=#{jltour_stateid},
+		jltour_cityid=#{jltour_cityid}, name=#{name},numbering=#{numbering},is_exclusive=#{is_exclusive},address=#{address},tel=#{tel},
 		check_in_rules=#{check_in_rules},feature=#{feature},service=#{service},stars=#{stars},city_id=#{city_id},longitude=#{longitude},latitude=#{latitude}
 		where hotel_id=#{hotel_id}
 

@@ -15,12 +15,16 @@
 		insert into jltour_hotel_id(hotelid,city,country,hotelname,state) values(#{hotelid},#{city},#{country},#{hotelname},#{state})
 		<!-- 这里sql结尾不能加分号，否则报“ORA-00911”的错误 -->
 	</insert>
+	<update id="update" parameterType="example.model.hotel.HotelId">
+		update jltour_hotel_id set hotelid=#{hotelid},city=#{city},country=#{country},hotelname=#{hotelname},state=#{state}
+		where hotelid=#{hotelid}
 
+	</update>
 	<!-- 这里的id必须和HotelMapper接口中的接口方法名相同，不然运行的时候也要报错 -->
-	<select id="getHotelId" resultType="HotelId" parameterType="java.lang.String">
+	<select id="getHotelId" resultType="example.model.hotel.HotelId" parameterType="java.lang.String">
 		select * from jltour_hotel_id where hotelid=#{hotelid}
 	</select>
-	<select id="findHotelIds" resultMap="hotelid">
+	<select id="findHotelIds" resultMap="hotelid" >
 		select * from jltour_hotel_id
 	</select>
 
