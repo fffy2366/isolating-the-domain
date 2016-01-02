@@ -19,6 +19,7 @@ apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+apply plugin: 'war'
 
 sourceCompatibility = compatibility
 targetCompatibility = compatibility
@@ -72,6 +73,7 @@ dependencies {
     runtime("com.h2database:h2:1.4.187")
     runtime("mysql:mysql-connector-java:5.1.6")
     runtime("com.google.code.gson:gson:2.5")
+    runtime("commons-dbcp:commons-dbcp:1.4")
 
 
     compile("org.springframework.boot:spring-boot-starter-mail:${springBootVersion}")

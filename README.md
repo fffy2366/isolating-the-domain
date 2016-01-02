@@ -49,3 +49,7 @@ https://github.com/system-sekkei/isolating-the-domain
 [h2database](http://www.h2database.com/html/tutorial.html#console_settings)
 
 [Querying the embedded H2 database of a Spring Boot application](http://blog.techdev.de/querying-the-embedded-h2-database-of-a-spring-boot-application/)
+
+[使用IntelliJ IDEA，gradle开发Java web应用步骤](http://my.oschina.net/u/1010578/blog/390094)
+[Intellij IDEA 的使用](http://my.oschina.net/lujianing/blog/177042#OSC_h1_2)
+

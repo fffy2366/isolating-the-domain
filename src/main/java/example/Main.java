@@ -28,7 +28,7 @@ public class Main {
         sqlSessionFactory = MyBatisUtil.getSqlSessionFactory();
     }
 
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         // write your code here
         //doPost(message,"http://58.250.56.214:6000/commonQueryServlet") ;
         String message ;
@@ -73,7 +73,7 @@ public class Main {
 
             //3.3抓取价格 hotelid个数是否有限制？{"data":[],"msg":"未查到相关价格！","success":1}?
             // 获取酒店id->分组，加字段，抓取，保存！
-            curlHotelPrice("2","","2016-02-08","2016-02-19") ;
+            curlHotelPrice("1","","2016-02-08","2016-02-19") ;
             //System.out.print(res);
 
 
@@ -120,6 +120,15 @@ public class Main {
                         HotelPriceResponse.Data.RoomPriceDetail detail = roomPriceDetailList.get(j) ;
                         int roomtypeid = detail.getRoomtypeid() ;
                         int rateType = detail.getRatetype() ;
+                        int includebreakfastqty2 = detail.getIncludebreakfastqty2() ;
+                        String night = detail.getNight() ;//日期
+                        String response = gson.toJson(detail);
+                        //System.out.println(response) ;
+                        System.out.println(roomtypeid) ;
+                        System.out.println(rateType) ;
+                        System.out.println(night) ;
+                        //查找该房型该天是否存在数据
+                        //HotelPrice hotelPrice = HotelPriceS
 
                     }
                 }

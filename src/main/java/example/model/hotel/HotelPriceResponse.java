@@ -128,6 +128,83 @@ public class HotelPriceResponse {
             private String advancetime2;//时间
             private int allotmenttype;//配额类型
             private String appointeddate;//指定日期
+            private String beginday;//指定开始日期
+            private String beginday2;//指定时段开始日期
+            private String businessprice;//商务价
+            private int cashscaletype;//超出了取消修改条款,扣费/罚金的类型。"12   扣全额 11   扣首晚房费  默认11"
+            private int continuousdays;//连住晚数
+            private String currency;//币种
+            private int dayselect;//入住前/确认后 多少天
+            private String endday;//指定结束日期
+            private String endday2;//指定时段结束日期
+            private int facepaytype;//现付类型
+            private int faceprice;//现付价格
+            private int hotelid;//酒店ID
+            /**
+             * 含早份数:中1份,西1份,自1份
+             * "10   不含
+             * 11	1份中早
+             * 12	1份西早
+             * 13	1份自助
+             * 21	2份中早
+             * 22	2份西早
+             * 23	2份自助
+             * 31	3份中早
+             * 32	3份西早
+             * 33   3份自助
+             * 34   床位早
+             * 35	4份自助
+             * 36	5份自助
+             * 37	6份自助
+             * 38	7份自助
+             * 39   1份早晚自助
+             * 40   2份早晚自助
+             * 41   半食宿
+             * 42   全食宿
+             * 43   全包
+             * 44   4份中早
+             * 45   4份西早"
+             */
+            private int includebreakfastqty2;
+            private int internetprice;//上网类型 "1：宽带 2：拔号 3: wi-fi 8: 无网络"
+            private int ishousing;//是否甩房 1为是，8为否。
+            private String keyid;//keyid标识
+            private String lastupdatepricetime;//最后修改时间 每次更新都以最后修改时间参考
+            private String namechn;//"酒店中文名称"
+            /**
+             * "<0: 收费，金额未定
+             * =0:免费
+             * =1: 收费，金额未定
+             * >1:上网费用"
+             */
+            private int netcharge;//是否免费带宽，如收费则上为网价格
+            private String night;//日期datetime2011-09-09
+            private String noedit;//不可修改包括内容  "late	推迟入住 advance	提前入住 , minusday	减少天数  , minusqty	减少间数,name	入住人名字,roomtype	修改房型,allorder	所有内容"
+            private int noeditorcancel;//不可修改/不可取消 "11 不可修改 12 不可取消"
+            private String preeprice;//同行标准价
+            private int pricingtype;//定价类型 11:现付反佣，12:预付
+            private int qtyable;//当前可售房间数量  cutofdayqty-orderqty "大于0表示可即时确认。剩多少间 等于0表示需要等待确认 小于0表示满房"
+            private int ratetype;//价格类型id,含单早价，含早价，含双早价，提前天价，连住价 捷旅产品人员定义的价格类型，如含早价、含双早价、提前3天价等。
+            private String ratetypename;//价格类型名称
+            private int restype;//"11 入住前  12 确认后"
+            private int roomtypeid;//房型ID
+            private String roomtypename;//房型名称
+            private int supplierid;//供应商ID
+            /**
+             * "11	提前预订
+             * 12	指定日期前订
+             * 13	连住晚数
+             * 14	指定时间段能订"
+             */
+            private int termtype;//预订条款类型:提前订房,指定日期前,连住晚数,指定时间段
+            private String timeselect;//入住前/确认后 多少天 几点前 "例如：18:00"
+            /**
+             * "11	提前天数
+             * 12	指定时段
+             * 13	即订即保
+             * 14	无限制"
+             */
+            private int voidabletype;//取消修改条款类型
 
             public int getAdvancedays() {
                 return advancedays;
@@ -449,83 +526,7 @@ public class HotelPriceResponse {
                 this.voidabletype = voidabletype;
             }
 
-            private String beginday;//指定开始日期
-            private String beginday2;//指定时段开始日期
-            private String businessprice;//商务价
-            private int cashscaletype;//超出了取消修改条款,扣费/罚金的类型。"12   扣全额 11   扣首晚房费  默认11"
-            private int continuousdays;//连住晚数
-            private String currency;//币种
-            private int dayselect;//入住前/确认后 多少天
-            private String endday;//指定结束日期
-            private String endday2;//指定时段结束日期
-            private int facepaytype;//现付类型
-            private int faceprice;//现付价格
-            private int hotelid;//酒店ID
-            /**
-             * 含早份数:中1份,西1份,自1份
-             * "10   不含
-             * 11	1份中早
-             * 12	1份西早
-             * 13	1份自助
-             * 21	2份中早
-             * 22	2份西早
-             * 23	2份自助
-             * 31	3份中早
-             * 32	3份西早
-             * 33   3份自助
-             * 34   床位早
-             * 35	4份自助
-             * 36	5份自助
-             * 37	6份自助
-             * 38	7份自助
-             * 39   1份早晚自助
-             * 40   2份早晚自助
-             * 41   半食宿
-             * 42   全食宿
-             * 43   全包
-             * 44   4份中早
-             * 45   4份西早"
-             */
-            private int includebreakfastqty2;
-            private int internetprice;//上网类型 "1：宽带 2：拔号 3: wi-fi 8: 无网络"
-            private int ishousing;//是否甩房 1为是，8为否。
-            private String keyid;//keyid标识
-            private String lastupdatepricetime;//最后修改时间 每次更新都以最后修改时间参考
-            private String namechn;//"酒店中文名称"
-            /**
-             * "<0: 收费，金额未定
-             * =0:免费
-             * =1: 收费，金额未定
-             * >1:上网费用"
-             */
-            private int netcharge;//是否免费带宽，如收费则上为网价格
-            private String night;//日期datetime2011-09-09
-            private String noedit;//不可修改包括内容  "late	推迟入住 advance	提前入住 , minusday	减少天数  , minusqty	减少间数,name	入住人名字,roomtype	修改房型,allorder	所有内容"
-            private int noeditorcancel;//不可修改/不可取消 "11 不可修改 12 不可取消"
-            private String preeprice;//同行标准价
-            private int pricingtype;//定价类型 11:现付反佣，12:预付
-            private int qtyable;//当前可售房间数量  cutofdayqty-orderqty "大于0表示可即时确认。剩多少间 等于0表示需要等待确认 小于0表示满房"
-            private int ratetype;//价格类型id,含单早价，含早价，含双早价，提前天价，连住价 捷旅产品人员定义的价格类型，如含早价、含双早价、提前3天价等。
-            private String ratetypename;//价格类型名称
-            private int restype;//"11 入住前  12 确认后"
-            private int roomtypeid;//房型ID
-            private String roomtypename;//房型名称
-            private int supplierid;//供应商ID
-            /**
-             * "11	提前预订
-             * 12	指定日期前订
-             * 13	连住晚数
-             * 14	指定时间段能订"
-             */
-            private int termtype;//预订条款类型:提前订房,指定日期前,连住晚数,指定时间段
-            private String timeselect;//入住前/确认后 多少天 几点前 "例如：18:00"
-            /**
-             * "11	提前天数
-             * 12	指定时段
-             * 13	即订即保
-             * 14	无限制"
-             */
-            private int voidabletype;//取消修改条款类型
+
         }
 
     }

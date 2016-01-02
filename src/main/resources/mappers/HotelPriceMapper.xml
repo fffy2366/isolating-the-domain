@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="example.datasource.hotel.HotelPriceMapper">
+
+    <insert id="insertHotel" parameterType="example.model.hotel.HotelPrice" useGeneratedKeys="true" keyProperty="hotel_id">
+		insert into hotel(jltour_hotel_id,jltour_countryid,jltour_stateid,jltour_cityid,name,numbering,is_exclusive,address,tel,
+		check_in_rules,feature,service,stars,city_id,longitude,latitude)
+		values(#{jltour_hotel_id},#{jltour_countryid},#{jltour_stateid},#{jltour_cityid},#{name},#{numbering},#{is_exclusive},#{address},#{tel},
+		#{check_in_rules},#{feature},#{service},#{stars},#{city_id},#{longitude},#{latitude})
+	</insert>
+
+    <update id="update" parameterType="example.model.hotel.HotelPrice">
+		update hotel set jltour_hotel_id=#{jltour_hotel_id},jltour_countryid=#{jltour_countryid},jltour_stateid=#{jltour_stateid},
+		jltour_cityid=#{jltour_cityid}, name=#{name},numbering=#{numbering},is_exclusive=#{is_exclusive},address=#{address},tel=#{tel},
+		check_in_rules=#{check_in_rules},feature=#{feature},service=#{service},stars=#{stars},city_id=#{city_id},longitude=#{longitude},latitude=#{latitude}
+		where hotel_id=#{hotel_id}
+
+	</update>
+    <select id="getHotelPrice" resultType="example.model.hotel.HotelPrice" parameterType="example.model.hotel.HotelPrice">
+		select * from hotel_room_price where jltour_roomtypeid=#{price.jltour_roomtypeid} AND jltour_ratetype=#{price.jltour_ratetype}
+		AND per_day=#{price.per_day
+		}
+	</select>
+
+
+</mapper>
