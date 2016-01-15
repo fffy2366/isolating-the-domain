@@ -26,6 +26,8 @@ $ gradle idea
 ```
 
 
+
+
 git@github.com:system-sekkei/isolating-the-domain.git
 https://github.com/system-sekkei/isolating-the-domain
 
@@ -52,4 +54,8 @@ https://github.com/system-sekkei/isolating-the-domain
 
 [使用IntelliJ IDEA，gradle开发Java web应用步骤](http://my.oschina.net/u/1010578/blog/390094)
 [Intellij IDEA 的使用](http://my.oschina.net/lujianing/blog/177042#OSC_h1_2)
+
+[IntelliJ IDEA WEB项目的部署配置](http://blog.csdn.net/z69183787/article/details/41416189)
+
+[SSM框架——详细整合教程（Spring+SpringMVC+MyBatis](http://blog.csdn.net/gebitan505/article/details/44455235)
 
